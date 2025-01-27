@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const RENDER_DATA_URL = "http://localhost:5005/api/render-data";
-const UPDATE_SIMULATION_URL = "http://localhost:5005/api/simulation/update";
+//const RENDER_DATA_URL = "http://localhost:5005/api/render-data";
+//const UPDATE_SIMULATION_URL = "http://localhost:5005/api/simulation/update";
+
+const RENDER_DATA_URL = "/intersection/api/render-data";
+const UPDATE_SIMULATION_URL = "/intersection/api/update";
 
 function App() {
   const canvasRef = useRef(null);

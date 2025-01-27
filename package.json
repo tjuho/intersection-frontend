@@ -2,6 +2,8 @@
   "name": "intersection-fe",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/intersection",
+  "proxy": "http://localhost:5005",
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "18.2.0",
@@ -33,3 +35,7 @@
     ]
   }
 }
+
+
+
+
