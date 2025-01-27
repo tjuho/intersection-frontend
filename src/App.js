@@ -47,7 +47,7 @@ function App() {
     try {
       const response = await fetch(UPDATE_SIMULATION_URL, { method: "POST" });
       const result = await response.json();
-      console.log("Simulation updated:", result);
+      //console.log("Simulation updated:", result);
     } catch (error) {
       console.error("Error updating simulation:", error);
     }
