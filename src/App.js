@@ -58,7 +58,7 @@ function App() {
     const updateInterval = setInterval(() => {
       updateSimulation();
       fetchRenderData();
-    }, 100); // Adjust interval as needed (e.g., 10 FPS)
+    }, 200); // Adjust interval as needed (e.g., 100 for 10 FPS)
 
     return () => clearInterval(updateInterval); // Cleanup interval on unmount
   }, []);
@@ -129,35 +129,31 @@ function App() {
       );
       ctx.restore();
     });
+
     // Draw traffic lights
     renderData.traffic_lights.forEach((light) => {
+      const trafficLightOffset = 8; // Distance to offset the traffic light
+      const trafficLightOffset1 = 8; // Distance to offset the traffic light
       const carWidth = renderData.cars[0]?.width || 1; // Default to 1 if no cars exist
       const carLength = renderData.cars[0]?.length || 1;
 
       const lightWidth = carWidth * 2 * zoom;
       const lightHeight = carLength * 2 * zoom;
 
+      const offsetX = -trafficLightOffset * Math.cos(light.direction) + trafficLightOffset1 * Math.sin(light.direction); // Offset in X direction
+      const offsetY = -trafficLightOffset * Math.sin(light.direction) - trafficLightOffset1 * Math.cos(light.direction); // Offset in Y direction
+
       ctx.save();
-      ctx.translate(scaleX(light.x), scaleY(light.y));
+      ctx.translate(scaleX(light.x + offsetX), scaleY(light.y + offsetY));
       ctx.fillStyle = light.color;
 
-      // Draw square traffic light centered at its position
-      ctx.fillRect(
-        -lightWidth / 2, // Center the square
-        -lightHeight / 2,
-        lightWidth,
-        lightHeight
-      );
+      // Draw circular traffic light centered at its position
+      ctx.beginPath();
+      ctx.arc(0, 0, 5 * zoom, 0, 2 * Math.PI);
+      ctx.fill();
       ctx.restore();
     });
 
-    // Draw traffic lights
-    // renderData.traffic_lights.forEach((light) => {
-    //   ctx.beginPath();
-    //   ctx.arc(scaleX(light.x), scaleY(light.y), 10 * zoom, 0, 2 * Math.PI);
-    //   ctx.fillStyle = light.color;
-    //   ctx.fill();
-    // });
   }, [renderData, zoom, offset]);
 
   return (
